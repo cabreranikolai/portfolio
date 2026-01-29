@@ -3,6 +3,15 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
+// Import project images
+// Note: Using crop forecast images as placeholders for EasyBaryo until actual images are provided
+import crop1 from '../assets/projects/crop_forecast_1.png';
+import crop2 from '../assets/projects/crop_forecast_2.png';
+import crop3 from '../assets/projects/crop_forecast_3.png';
+import qr1 from '../assets/projects/qr_attendance_1.png';
+import qr2 from '../assets/projects/qr_attendance_2.png';
+import qr3 from '../assets/projects/qr_attendance_3.png';
+
 const projectsData = [
     {
         title: 'EasyBaryo',
@@ -15,11 +24,7 @@ const projectsData = [
             'Role-based user access (Admin / Secretary)'
         ],
         tags: ['React', 'Django REST Framework', 'Tailwind', 'MySQL'],
-        images: [
-            '/src/assets/projects/easybaryo_1.png',
-            '/src/assets/projects/easybaryo_2.png',
-            '/src/assets/projects/easybaryo_3.png'
-        ]
+        images: [crop1, crop2, crop3] // Placeholder: using crop images until EasyBaryo images are added
     },
     {
         title: 'Crop Forecasting',
@@ -32,11 +37,7 @@ const projectsData = [
             'Dashboard with analytical reports'
         ],
         tags: ['React', 'Django', 'Chart.js', 'Leaflet', 'PostgreSQL'],
-        images: [
-            '/src/assets/projects/crop_forecast_1.png',
-            '/src/assets/projects/crop_forecast_2.png',
-            '/src/assets/projects/crop_forecast_3.png'
-        ]
+        images: [crop1, crop2, crop3]
     },
     {
         title: 'QR-Based Attendance Management',
@@ -49,11 +50,7 @@ const projectsData = [
             'Attendance reports and summaries'
         ],
         tags: ['React', 'Node.js', 'Express', 'MongoDB', 'QRCode.js'],
-        images: [
-            '/src/assets/projects/qr_attendance_1.png',
-            '/src/assets/projects/qr_attendance_2.png',
-            '/src/assets/projects/qr_attendance_3.png'
-        ]
+        images: [qr1, qr2, qr3]
     },
 ];
 
