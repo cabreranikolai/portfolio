@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  /* Color Palette - Light Mode (Default) */
+  --primary-color: #0F172A; /* Deep Navy */
+  --accent-color: #06B6D4; /* Cyan/Teal */
+  --accent-hover: #0891B2;
+  --bg-color: #F8FAFC; /* Off-white */
+  --bg-secondary: #E2E8F0; /* Light Gray for cards/sections */
+  --text-primary: #1E293B; /* Slate 800 */
+  --text-secondary: #475569; /* Slate 600 */
+  --white: #ffffff;
+}
+
+.dark {
+  /* Color Palette - Dark Mode */
+  --primary-color: #F8FAFC; /* White-ish for Headings */
+  --accent-color: #22D3EE; /* Brighter Cyan for Dark Mode */
+  --accent-hover: #67E8F9;
+  --bg-color: #0F172A; /* Deep Navy Background */
+  --bg-secondary: #1E293B; /* Slightly lighter navy for cards */
+  --text-primary: #F1F5F9; /* Slate 100 */
+  --text-secondary: #94A3B8; /* Slate 400 */
+  --white: #1E293B; /* Replaces white backgrounds in dark mode */
+}
+
+@theme {
+  --color-primary: var(--primary-color);
+  --color-accent: var(--accent-color);
+  --color-accent-hover: var(--accent-hover);
+  --color-bg: var(--bg-color);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+}
+
+body {
+  font-family: 'Open Sans', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.section {
+  @apply py-20;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
