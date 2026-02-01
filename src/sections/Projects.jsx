@@ -287,8 +287,11 @@ const Projects = () => {
                             transition={{ duration: 0.3 }}
                             src={lightbox.images[lightbox.index]}
                             alt="Project Full View"
-                            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
-                            onClick={(e) => e.stopPropagation()}
+                            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                nextLightboxImage();
+                            }}
                         />
 
                         {/* Image Counter */}
