@@ -58,7 +58,7 @@ const projectsData = [
 const ProjectCard = ({ project, openLightbox, index }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Auto-slideshow logic
+    // Auto-slideshow logic for card preview
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
@@ -67,11 +67,13 @@ const ProjectCard = ({ project, openLightbox, index }) => {
         return () => clearInterval(timer);
     }, [project.images.length]);
 
-    const nextImage = () => {
+    const nextImage = (e) => {
+        e.stopPropagation();
         setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
     };
 
-    const prevImage = () => {
+    const prevImage = (e) => {
+        e.stopPropagation();
         setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
     };
 
@@ -86,7 +88,10 @@ const ProjectCard = ({ project, openLightbox, index }) => {
             {/* Image Carousel */}
             <div className="relative h-64 bg-[var(--bg-secondary)] group border-b border-[var(--bg-secondary)]/50">
                 {/* Image or Placeholder */}
-                <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)] font-medium overflow-hidden">
+                <div
+                    className="w-full h-full flex items-center justify-center text-[var(--text-secondary)] font-medium overflow-hidden cursor-pointer"
+                    onClick={() => openLightbox(project.images, currentImageIndex)}
+                >
                     <motion.img
                         key={currentImageIndex}
                         initial={{ opacity: 0, x: 20 }}
@@ -95,8 +100,7 @@ const ProjectCard = ({ project, openLightbox, index }) => {
                         transition={{ duration: 0.4 }}
                         src={project.images[currentImageIndex]}
                         alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                        className="w-full h-full object-contain p-2 cursor-pointer transition-transform duration-300 group-hover:scale-105"
-                        onClick={() => openLightbox(project.images[currentImageIndex])}
+                        className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.style.display = 'none';
@@ -112,14 +116,14 @@ const ProjectCard = ({ project, openLightbox, index }) => {
 
                 {/* Navigation Arrows */}
                 <button
-                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                    onClick={prevImage}
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"
                     aria-label="Previous image"
                 >
                     <FaChevronLeft size={16} />
                 </button>
                 <button
-                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                    onClick={nextImage}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"
                     aria-label="Next image"
                 >
@@ -175,17 +179,50 @@ const ProjectCard = ({ project, openLightbox, index }) => {
 };
 
 const Projects = () => {
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [lightbox, setLightbox] = useState({
+        isOpen: false,
+        images: [],
+        index: 0
+    });
 
-    const openLightbox = (image) => {
-        setSelectedImage(image);
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    const openLightbox = (images, index) => {
+        setLightbox({ isOpen: true, images, index });
+        document.body.style.overflow = 'hidden';
     };
 
     const closeLightbox = () => {
-        setSelectedImage(null);
-        document.body.style.overflow = 'unset'; // Restore scrolling
+        setLightbox({ ...lightbox, isOpen: false });
+        document.body.style.overflow = 'unset';
     };
+
+    const nextLightboxImage = (e) => {
+        if (e) e.stopPropagation();
+        setLightbox(prev => ({
+            ...prev,
+            index: (prev.index + 1) % prev.images.length
+        }));
+    };
+
+    const prevLightboxImage = (e) => {
+        if (e) e.stopPropagation();
+        setLightbox(prev => ({
+            ...prev,
+            index: (prev.index - 1 + prev.images.length) % prev.images.length
+        }));
+    };
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!lightbox.isOpen) return;
+            if (e.key === 'ArrowRight') nextLightboxImage();
+            if (e.key === 'ArrowLeft') prevLightboxImage();
+            if (e.key === 'Escape') closeLightbox();
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [lightbox.isOpen]);
 
     return (
         <section id="projects" className="section bg-[var(--bg-color)] relative">
@@ -213,24 +250,52 @@ const Projects = () => {
             </div>
 
             {/* Lightbox Modal */}
-            {selectedImage && (
+            {lightbox.isOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 transition-opacity duration-300"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 transition-opacity duration-300"
                     onClick={closeLightbox}
                 >
                     <button
-                        className="absolute top-6 right-6 text-white hover:text-[var(--accent-color)] transition-colors p-2"
+                        className="absolute top-6 right-6 text-white hover:text-[var(--accent-color)] transition-colors p-2 z-50"
                         onClick={closeLightbox}
                         aria-label="Close lightbox"
                     >
                         <FaTimes size={32} />
                     </button>
-                    <img
-                        src={selectedImage}
-                        alt="Project Full View"
-                        className="max-w-full max-h-[90vh] object-contain rounded-md shadow-2xl"
-                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image
-                    />
+
+                    {/* Lightbox Navigation */}
+                    <button
+                        onClick={prevLightboxImage}
+                        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all z-50"
+                        aria-label="Previous image"
+                    >
+                        <FaChevronLeft size={24} />
+                    </button>
+                    <button
+                        onClick={nextLightboxImage}
+                        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all z-50"
+                        aria-label="Next image"
+                    >
+                        <FaChevronRight size={24} />
+                    </button>
+
+                    <div className="relative w-full max-w-5xl h-full flex flex-col items-center justify-center">
+                        <motion.img
+                            key={lightbox.index}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                            src={lightbox.images[lightbox.index]}
+                            alt="Project Full View"
+                            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+
+                        {/* Image Counter */}
+                        <div className="mt-6 text-white/70 font-medium">
+                            {lightbox.index + 1} / {lightbox.images.length}
+                        </div>
+                    </div>
                 </div>
             )}
         </section>
