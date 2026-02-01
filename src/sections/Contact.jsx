@@ -1,16 +1,28 @@
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
     return (
-        <footer id="contact" className="bg-slate-900 text-white pt-20 pb-10">
+        <footer id="contact" className="bg-slate-900 text-white pt-20 pb-10 overflow-hidden">
             <div className="container">
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-3xl md:text-4xl font-bold text-center mb-16 text-white"
+                >
                     Get In Touch
-                </h2>
+                </motion.h2>
 
                 <div className="grid md:grid-cols-2 gap-12 mb-20">
                     {/* Contact Info */}
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
                         <h3 className="text-2xl font-bold mb-6 text-[var(--accent-color)]">Let's Talk</h3>
                         <p className="mb-8 text-gray-300 text-lg">
                             I'm open to freelance opportunities and full-time roles.
@@ -37,10 +49,16 @@ const Contact = () => {
                             <a href="https://www.linkedin.com/in/cabreranikolai/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-color)] transition-colors"><FaLinkedin /></a>
                             <a href="https://www.instagram.com/diakosinikolai/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-color)] transition-colors"><FaInstagram /></a>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Contact Form */}
-                    <form className="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10">
+                    <motion.form
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
+                    >
                         <div className="mb-6">
                             <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Name</label>
                             <input type="text" id="name" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--accent-color)] focus:bg-white/20 transition-all" placeholder="Your Name" />
@@ -56,7 +74,7 @@ const Contact = () => {
                         <button type="button" className="w-full bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-lg transition-colors">
                             Send Message
                         </button>
-                    </form>
+                    </motion.form>
                 </div>
 
                 <div className="border-t border-white/10 pt-8 text-center text-gray-400 text-sm">

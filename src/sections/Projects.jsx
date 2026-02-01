@@ -2,6 +2,7 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 // Import project images
 // Note: Using crop forecast images as placeholders for EasyBaryo until actual images are provided
@@ -54,7 +55,7 @@ const projectsData = [
     },
 ];
 
-const ProjectCard = ({ project, openLightbox }) => {
+const ProjectCard = ({ project, openLightbox, index }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const nextImage = () => {
@@ -66,7 +67,13 @@ const ProjectCard = ({ project, openLightbox }) => {
     };
 
     return (
-        <div className="bg-[var(--bg-color)] rounded-xl overflow-hidden shadow-lg flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="bg-[var(--bg-color)] rounded-xl overflow-hidden shadow-lg flex flex-col h-full hover:-translate-y-1 transition-transform duration-300"
+        >
             {/* Image Carousel */}
             <div className="relative h-64 bg-[var(--bg-secondary)] group border-b border-[var(--bg-secondary)]/50">
                 {/* Image or Placeholder */}
@@ -149,7 +156,7 @@ const ProjectCard = ({ project, openLightbox }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
@@ -169,18 +176,24 @@ const Projects = () => {
     return (
         <section id="projects" className="section bg-[var(--bg-color)] relative">
             <div className="container">
-                <div className="text-center mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
+                >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--primary-color)]">
                         Featured Projects
                     </h2>
                     <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
                         Here are some of the key projects I've worked on, showcasing my experience in full-stack development, data visualization, and system automation.
                     </p>
-                </div>
+                </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-8">
                     {projectsData.map((project, index) => (
-                        <ProjectCard key={index} project={project} openLightbox={openLightbox} />
+                        <ProjectCard key={index} project={project} openLightbox={openLightbox} index={index} />
                     ))}
                 </div>
             </div>

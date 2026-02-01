@@ -1,5 +1,6 @@
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPhp } from 'react-icons/fa';
 import { SiTailwindcss, SiTypescript, SiFigma, SiAdobephotoshop } from 'react-icons/si';
+import { motion } from 'framer-motion';
 
 const skillsData = [
     { name: 'HTML5', icon: <FaHtml5 className="text-[#E34F26]" /> },
@@ -18,21 +19,31 @@ const Skills = () => {
     return (
         <section id="skills" className="section bg-[var(--bg-color)]">
             <div className="container">
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[var(--primary-color)]">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-3xl md:text-4xl font-bold text-center mb-16 text-[var(--primary-color)]"
+                >
                     My Skills
-                </h2>
+                </motion.h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                    {skillsData.map((skill) => (
-                        <div
+                    {skillsData.map((skill, index) => (
+                        <motion.div
                             key={skill.name}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.05 }}
                             className="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center gap-4 group"
                         >
                             <div className="text-5xl transition-transform group-hover:scale-110 duration-300">
                                 {skill.icon}
                             </div>
                             <p className="font-semibold text-[var(--text-secondary)]">{skill.name}</p>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
