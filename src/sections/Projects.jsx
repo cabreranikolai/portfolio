@@ -58,6 +58,15 @@ const projectsData = [
 const ProjectCard = ({ project, openLightbox, index }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+    // Auto-slideshow logic
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(timer);
+    }, [project.images.length]);
+
     const nextImage = () => {
         setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
     };
@@ -70,15 +79,20 @@ const ProjectCard = ({ project, openLightbox, index }) => {
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ amount: 0.2 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="bg-[var(--bg-color)] rounded-xl overflow-hidden shadow-lg flex flex-col h-full hover:-translate-y-1 transition-transform duration-300"
         >
             {/* Image Carousel */}
             <div className="relative h-64 bg-[var(--bg-secondary)] group border-b border-[var(--bg-secondary)]/50">
                 {/* Image or Placeholder */}
-                <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)] font-medium">
-                    <img
+                <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)] font-medium overflow-hidden">
+                    <motion.img
+                        key={currentImageIndex}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.4 }}
                         src={project.images[currentImageIndex]}
                         alt={`${project.title} screenshot ${currentImageIndex + 1}`}
                         className="w-full h-full object-contain p-2 cursor-pointer transition-transform duration-300 group-hover:scale-105"
@@ -99,14 +113,14 @@ const ProjectCard = ({ project, openLightbox, index }) => {
                 {/* Navigation Arrows */}
                 <button
                     onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"
                     aria-label="Previous image"
                 >
                     <FaChevronLeft size={16} />
                 </button>
                 <button
                     onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"
                     aria-label="Next image"
                 >
                     <FaChevronRight size={16} />
@@ -179,7 +193,7 @@ const Projects = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >

@@ -8,7 +8,7 @@ const Contact = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                     className="text-3xl md:text-4xl font-bold text-center mb-16 text-white"
                 >
@@ -20,7 +20,7 @@ const Contact = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8 }}
                     >
                         <h3 className="text-2xl font-bold mb-6 text-[var(--accent-color)]">Let's Talk</h3>
@@ -55,7 +55,7 @@ const Contact = () => {
                     <motion.form
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8 }}
                         className="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
                     >

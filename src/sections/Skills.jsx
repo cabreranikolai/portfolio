@@ -22,7 +22,7 @@ const Skills = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                     className="text-3xl md:text-4xl font-bold text-center mb-16 text-[var(--primary-color)]"
                 >
@@ -35,7 +35,7 @@ const Skills = () => {
                             key={skill.name}
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                            viewport={{ amount: 0.2 }}
                             transition={{ duration: 0.4, delay: index * 0.05 }}
                             className="bg-[var(--bg-secondary)] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center gap-4 group"
                         >

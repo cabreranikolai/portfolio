@@ -8,7 +8,7 @@ const About = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                     className="text-3xl md:text-4xl font-bold text-center mb-16 text-[var(--primary-color)]"
                 >
@@ -20,7 +20,7 @@ const About = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="mb-8 md:mb-0 relative"
                     >
@@ -34,7 +34,7 @@ const About = () => {
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
                         <h3 className="text-2xl font-bold mb-4 text-[var(--primary-color)]">
@@ -54,7 +54,7 @@ const About = () => {
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
-                                viewport={{ once: true }}
+                                viewport={{ amount: 0.2 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 className="p-4 bg-[var(--bg-secondary)] rounded-lg"
                             >
@@ -64,7 +64,7 @@ const About = () => {
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
-                                viewport={{ once: true }}
+                                viewport={{ amount: 0.2 }}
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="p-4 bg-[var(--bg-secondary)] rounded-lg"
                             >

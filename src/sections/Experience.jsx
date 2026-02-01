@@ -39,7 +39,7 @@ const Experience = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                     className="text-3xl md:text-4xl font-bold text-center mb-16 text-[var(--primary-color)]"
                 >
@@ -51,7 +51,7 @@ const Experience = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8 }}
                     >
                         <h3 className="text-2xl font-bold mb-8 text-[var(--accent-color)]">Work Experience</h3>
@@ -73,7 +73,7 @@ const Experience = () => {
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ amount: 0.2 }}
                         transition={{ duration: 0.8 }}
                     >
                         <h3 className="text-2xl font-bold mb-8 text-[var(--accent-color)]">Education</h3>
@@ -83,7 +83,7 @@ const Experience = () => {
                                     key={index}
                                     initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ amount: 0.2 }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     className="relative"
                                 >
