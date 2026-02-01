@@ -47,7 +47,8 @@ const About = () => {
                         </p>
                         <p className="text-[var(--text-secondary)] mb-6 text-lg text-justify">
                             I focus on writing clean, maintainable code and creating user-friendly interfaces that are accessible to everyone.
-                            When I’m not coding, you’ll usually find me exploring new web technologies, refining my design skills, or working on personal projects.
+                            With a strong background in graphic design, I bring a unique perspective to front-end development, ensuring that every project is not only functional but also visually stunning.
+                            You can check out my design work on my <a href="https://cabreranikolai-graphicportfolio.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-color)] hover:underline font-medium">Graphic Designer Portfolio</a>.
                         </p>
 
                         <div className="grid grid-cols-2 gap-4 text-center mt-8">
