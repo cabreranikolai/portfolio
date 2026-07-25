@@ -4,7 +4,7 @@ const experienceData = [
     {
         role: 'Freelance Graphic Designer',
         company: 'Self-Employed',
-        period: '2021 - Present',
+        period: '2021 - 2026',
         description: 'Designed digital layouts and visual materials for various clients. Managed multiple projects while meeting deadlines independently.'
     }
 ];
@@ -13,7 +13,7 @@ const educationData = [
     {
         degree: 'Bachelor of Science in Information Technology',
         school: 'Saint Louis College - Carlatan, San Fernando, La Union',
-        period: '2022 - Present'
+        period: '2022 - 2026'
     },
     {
         degree: 'Senior High School',
